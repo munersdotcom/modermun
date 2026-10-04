@@ -177,7 +177,6 @@
             <a href="#team" class="nav-link">Team</a>
             <a href="#contact" class="text-gold border border-gold px-4 py-2 text-sm hover:bg-gold hover:text-navy transition-colors">Ask Us</a>
         </div>
-        <!-- Mobile menu button placeholder -->
         <button class="lg:hidden text-cream"><i data-lucide="menu"></i></button>
     </nav>
 
@@ -377,29 +376,32 @@
         </div>
     </section>
 
-    <!-- 12. Register / CTA -->
+    <!-- 12. Register / CTA (Formspree Integrated) -->
     <section id="contact" class="py-32 bg-cream relative overflow-hidden">
-        <!-- Decorative bg elements -->
         <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
         <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
         
         <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
             <i data-lucide="mail-open" class="w-10 h-10 text-gold mx-auto mb-8"></i>
             <h2 class="font-serif text-4xl md:text-5xl text-navy mb-6">Ask Us Anything!</h2>
-            <p class="font-serif italic text-xl text-dark/70 mb-12">Do you have any questions regarding the conference? Feel free to reach out directly.</p>
+            <p class="font-serif italic text-xl text-dark/70 mb-12">Do you have any questions regarding the conference? Feel free to reach out.</p>
             
-            <!-- Quick Mail Access (No Form Required) -->
-            <div class="max-w-md mx-auto flex flex-col gap-4">
-                <a href="mailto:ask.modermun@hotmail.com?subject=MODERMUN%20Inquiry" class="w-full btn-solid-dark py-4 flex items-center justify-center gap-3 text-sm font-semibold tracking-wider">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                    <span>Send Email Directly</span>
-                </a>
-                <p class="font-sans text-xs text-dark/60 mt-1">
-                    Or write to us at: <a href="mailto:ask.modermun@hotmail.com" class="text-gold font-semibold underline">ask.modermun@hotmail.com</a>
-                </p>
+            <form id="contactForm" action="https://formspree.io/f/mnpjayaq" method="POST" class="max-w-md mx-auto flex flex-col gap-4 text-left">
+                <input type="text" name="name" placeholder="Full Name" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
+                <input type="email" name="email" placeholder="Email Address" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
+                <textarea name="message" placeholder="Your Question..." rows="4" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+                
+                <button type="submit" id="submitBtn" class="w-full btn-solid-dark py-3 mt-2 flex items-center justify-center gap-2">
+                    <span>Send Message</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <div id="formStatus" class="hidden max-w-md mx-auto mt-4 p-4 border border-gold/40 bg-white text-navy text-xs font-sans">
+                Thank you! Your message has been sent successfully.
             </div>
-            
-            <p class="font-sans text-xs text-dark/40 mt-12 uppercase tracking-widest">Official invitations and registration details will be communicated in due course.</p>
+
+            <p class="font-sans text-xs text-dark/40 mt-8 uppercase tracking-widest">Official invitations and registration details will be communicated in due course.</p>
         </div>
     </section>
 
@@ -448,12 +450,10 @@
         </div>
     </footer>
 
-    <!-- Minimal JS -->
+    <!-- JS -->
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        // Sticky Navbar effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -463,6 +463,36 @@
                 nav.classList.remove('scrolled');
                 nav.classList.add('py-8');
             }
+        });
+
+        // Formspree AJAX Submission
+        const form = document.getElementById("contactForm");
+        const status = document.getElementById("formStatus");
+        const submitBtn = document.getElementById("submitBtn");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            
+            const data = new FormData(e.target);
+            const response = await fetch(e.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                status.innerText = "Thank you! Your message has been sent successfully.";
+                status.classList.remove("hidden");
+                form.reset();
+            } else {
+                status.innerText = "An error occurred while sending the message. Please try again.";
+                status.classList.remove("hidden");
+            }
+            
+            submitBtn.disabled = false;
         });
     </script>
 </body>
