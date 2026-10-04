@@ -197,8 +197,6 @@
         </div>
     </header>
 
-
-
     <!-- 5. About MODERMUN -->
     <section id="about" class="py-24 bg-white border-y border-dark/5">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
@@ -220,8 +218,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- 7. Schedule -->
     <section id="schedule" class="py-24 bg-navy text-cream">
@@ -390,22 +386,20 @@
         <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
             <i data-lucide="mail-open" class="w-10 h-10 text-gold mx-auto mb-8"></i>
             <h2 class="font-serif text-4xl md:text-5xl text-navy mb-6">Ask Us Anything!</h2>
-            <p class="font-serif italic text-xl text-dark/70 mb-12">Do you have any questions regarding the conference? Feel free to reach out.</p>
+            <p class="font-serif italic text-xl text-dark/70 mb-12">Do you have any questions regarding the conference? Feel free to reach out directly.</p>
             
-            <!-- Working Form using Formsubmit.co -->
-            <form action="https://formsubmit.co/ask.modermun@hotmail.com" method="POST" class="max-w-md mx-auto flex flex-col gap-4 text-left">
-                <!-- Honeypot -->
-                <input type="text" name="_honey" style="display:none">
-                <!-- Disable Captcha (optional, but good for UX) -->
-                <input type="hidden" name="_captcha" value="false">
-                
-                <input type="text" name="name" placeholder="Full Name" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
-                <input type="email" name="email" placeholder="Email Address" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
-                <textarea name="message" placeholder="Your Question..." rows="4" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
-                
-                <button type="submit" class="w-full btn-solid-dark py-3 mt-2">Send Message</button>
-            </form>
-            <p class="font-sans text-xs text-dark/40 mt-8 uppercase tracking-widest">Official invitations and registration details will be communicated in due course.</p>
+            <!-- Quick Mail Access (No Form Required) -->
+            <div class="max-w-md mx-auto flex flex-col gap-4">
+                <a href="mailto:ask.modermun@hotmail.com?subject=MODERMUN%20Inquiry" class="w-full btn-solid-dark py-4 flex items-center justify-center gap-3 text-sm font-semibold tracking-wider">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    <span>Send Email Directly</span>
+                </a>
+                <p class="font-sans text-xs text-dark/60 mt-1">
+                    Or write to us at: <a href="mailto:ask.modermun@hotmail.com" class="text-gold font-semibold underline">ask.modermun@hotmail.com</a>
+                </p>
+            </div>
+            
+            <p class="font-sans text-xs text-dark/40 mt-12 uppercase tracking-widest">Official invitations and registration details will be communicated in due course.</p>
         </div>
     </section>
 
