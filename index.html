@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODERMUN - Model United Nations</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B1B3A',
+                        dark: '#1C1C1C',
+                        cream: '#F5F1E8',
+                        gold: '#B08D3F',
+                        gold_hover: '#927532',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #F5F1E8;
+            color: #1C1C1C;
+        }
+
+        /* Editorial Styles */
+        .hairline {
+            height: 1px;
+            background-color: rgba(28, 28, 28, 0.15);
+            width: 100%;
+        }
+        .hairline-gold {
+            height: 1px;
+            background-color: rgba(176, 141, 63, 0.4);
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn-outline-gold {
+            border: 1px solid #B08D3F;
+            color: #F5F1E8;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.75rem 2rem;
+            font-size: 0.875rem;
+        }
+        .btn-outline-gold:hover {
+            background-color: #B08D3F;
+            color: #0B1B3A;
+        }
+        
+        .btn-solid-dark {
+            background-color: #0B1B3A;
+            color: #F5F1E8;
+            border: 1px solid #0B1B3A;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .btn-solid-dark:hover {
+            background-color: transparent;
+            color: #0B1B3A;
+        }
+
+        /* Navigation */
+        #navbar {
+            transition: all 0.4s ease;
+        }
+        #navbar.scrolled {
+            background-color: rgba(11, 27, 58, 0.98);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(176, 141, 63, 0.2);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        /* Nav Links */
+        .nav-link {
+            position: relative;
+            color: #F5F1E8;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+        .nav-link:hover {
+            opacity: 1;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #B08D3F;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Image */
+        .bg-hero {
+            background-image: linear-gradient(rgba(11, 27, 58, 0.85), rgba(28, 28, 28, 0.7)), url('assets/banner.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Image treatments */
+        .img-editorial {
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.6s ease;
+        }
+        .img-editorial:hover {
+            filter: grayscale(30%) contrast(1.05);
+        }
+
+        /* Smooth fade-in animation */
+        .fade-in {
+            animation: fadeIn 1.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-navy">
+
+    <!-- 1. Top Bar -->
+    <div class="bg-dark text-cream py-1 px-6 border-b border-gray-800 text-xs font-sans tracking-widest uppercase flex justify-between items-center z-50 relative">
+        <div class="flex items-center gap-4 opacity-70">
+            <a href="mailto:ask.modermun@hotmail.com" class="hover:text-gold transition-colors flex items-center gap-2">
+                <i data-lucide="mail" class="w-3 h-3"></i> ask.modermun@hotmail.com
+            </a>
+        </div>
+        <div class="flex gap-4 opacity-70">
+            <a href="#" class="hover:text-gold transition-colors"><i data-lucide="instagram" class="w-3 h-3"></i></a>
+            <a href="#" class="hover:text-gold transition-colors"><i data-lucide="twitter" class="w-3 h-3"></i></a>
+            <a href="#" class="hover:text-gold transition-colors"><i data-lucide="linkedin" class="w-3 h-3"></i></a>
+        </div>
+    </div>
+
+    <!-- 2. Navbar -->
+    <nav id="navbar" class="fixed w-full z-40 top-0 pt-8 pb-6 px-6 lg:px-12 flex justify-between items-center bg-gradient-to-b from-navy/90 to-transparent">
+        <a href="#" class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="MODERMUN Logo" class="h-10 w-auto">
+            <span class="font-serif text-2xl lg:text-3xl text-cream tracking-wide">MODERMUN</span>
+        </a>
+        <div class="hidden lg:flex gap-8 items-center font-sans uppercase">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#schedule" class="nav-link">Schedule</a>
+            <a href="#venue" class="nav-link">Venue</a>
+            <a href="#accommodation" class="nav-link">Accommodation</a>
+            <a href="#team" class="nav-link">Team</a>
+            <a href="#contact" class="text-gold border border-gold px-4 py-2 text-sm hover:bg-gold hover:text-navy transition-colors">Ask Us</a>
+        </div>
+        <!-- Mobile menu button placeholder -->
+        <button class="lg:hidden text-cream"><i data-lucide="menu"></i></button>
+    </nav>
+
+    <!-- 3. Hero -->
+    <header class="h-screen w-full bg-hero flex flex-col justify-center items-center text-center px-4 relative pt-12">
+        <div class="fade-in max-w-4xl">
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl text-cream mb-6 tracking-tight">MODERMUN</h1>
+            <div class="w-24 h-px bg-gold mx-auto mb-6"></div>
+            <h2 class="font-serif italic text-xl md:text-3xl text-cream opacity-90 mb-12">Model United Nations Conference</h2>
+            
+            <div class="font-sans uppercase tracking-[0.2em] text-xs md:text-sm text-cream opacity-70 mb-12 space-y-2">
+                <p>Ankara Mod Eryaman Koleji</p>
+                <p class="text-gold">Date: To be announced</p>
+            </div>
+            
+            <a href="#contact" class="btn-outline-gold inline-block">Contact Us</a>
+        </div>
+    </header>
+
+
+
+    <!-- 5. About MODERMUN -->
+    <section id="about" class="py-24 bg-white border-y border-dark/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h3 class="font-sans uppercase tracking-widest text-sm text-gold mb-4">The Conference</h3>
+                    <h2 class="font-serif text-4xl md:text-5xl text-navy">About MODERMUN</h2>
+                </div>
+                <div class="hidden md:block w-32 h-px bg-dark/20 mb-3"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 font-sans text-dark/70 leading-relaxed font-light">
+                <div>
+                    <p class="mb-6">Our main goal is to offer the youth an incomparable opportunity to discover the world of international relations and the work of the United Nations. MODERMUN is about academic excellence.</p>
+                </div>
+                <div>
+                    <p class="mb-6">MODERMUN takes place in a prestigious educational institution in our capital Ankara. The delegates will be able to engage in a simulation, where they will be able to put themselves in the place of the world's leaders, make decisions that will shape the future of our planet, suggest resolutions, learn how to find a middle ground between the interests of their country and the good of the whole world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 7. Schedule -->
+    <section id="schedule" class="py-24 bg-navy text-cream">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12">
+            <h3 class="font-sans uppercase tracking-widest text-sm text-gold mb-4 text-center">Itinerary</h3>
+            <h2 class="font-serif text-4xl md:text-5xl mb-16 text-center">Conference Schedule</h2>
+            
+            <div class="space-y-12">
+                <!-- Day 1 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <h4 class="font-serif text-2xl text-gold">Day 1</h4>
+                        <div class="flex-grow h-px bg-white/20"></div>
+                        <span class="font-sans text-sm uppercase tracking-widest opacity-60">Opening</span>
+                    </div>
+                    <div class="space-y-4 font-sans font-light opacity-80">
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Registration & Welcome</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Opening Ceremony</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Committee Session I</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <h4 class="font-serif text-2xl text-gold">Day 2</h4>
+                        <div class="flex-grow h-px bg-white/20"></div>
+                        <span class="font-sans text-sm uppercase tracking-widest opacity-60">Debate</span>
+                    </div>
+                    <div class="space-y-4 font-sans font-light opacity-80">
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Committee Session II</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Lunch Break</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Committee Session III</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Social Event</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <h4 class="font-serif text-2xl text-gold">Day 3</h4>
+                        <div class="flex-grow h-px bg-white/20"></div>
+                        <span class="font-sans text-sm uppercase tracking-widest opacity-60">Resolution</span>
+                    </div>
+                    <div class="space-y-4 font-sans font-light opacity-80">
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Committee Session IV (Voting)</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>Closing Ceremony & Awards</span>
+                            <span class="font-mono">TBA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8 & 9. Venue & Accommodation -->
+    <section id="venue" class="py-24 px-6 lg:px-12 max-w-7xl mx-auto border-b border-dark/5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Venue -->
+            <div>
+                <h3 class="font-sans uppercase tracking-widest text-sm text-gold mb-4">Location</h3>
+                <h2 class="font-serif text-4xl text-navy mb-8">The Venue</h2>
+                <div class="aspect-video bg-dark/5 border border-dark/10 mb-8 flex items-center justify-center overflow-hidden">
+                    <img src="assets/venue.jpg" alt="Mod Eryaman Koleji Campus" class="w-full h-full object-cover img-editorial">
+                </div>
+                <h4 class="font-serif text-2xl text-dark mb-2">Ankara Mod Eryaman Koleji</h4>
+                <p class="font-sans font-light text-dark/70 leading-relaxed mb-6">The conference is going to take place at the prestigious establishment of Mod Eryaman Koleji. Equipped with a great infrastructure and furnished committee rooms, the venue offers the ideal setting for formal debates and diplomatic meetings.</p>
+                <div class="flex items-start gap-3 text-sm text-dark/60 font-sans">
+                    <i data-lucide="map-pin" class="w-4 h-4 mt-1 flex-shrink-0 text-gold"></i>
+                    <p>Eryaman, Ankara<br>Turkey</p>
+                </div>
+            </div>
+
+            <!-- Accommodation -->
+            <div id="accommodation">
+                <h3 class="font-sans uppercase tracking-widest text-sm text-gold mb-4">Lodging</h3>
+                <h2 class="font-serif text-4xl text-navy mb-8">Accommodation</h2>
+                <div class="aspect-video bg-white border border-dark/10 p-12 flex flex-col items-center justify-center text-center">
+                    <i data-lucide="hotel" class="w-12 h-12 text-dark/20 mb-6"></i>
+                    <p class="font-serif italic text-xl text-dark/80 mb-2">Details will be announced.</p>
+                    <p class="font-sans font-light text-sm text-dark/50 max-w-sm">We are actively coordinating with select partner hotels to secure comfortable, premium lodging at competitive rates for all attendees. Comprehensive booking details will be made available alongside the opening of registration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Secretariat / Team -->
+    <section id="team" class="py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+        <h3 class="font-sans uppercase tracking-widest text-sm text-gold mb-4 text-center">Leadership</h3>
+        <h2 class="font-serif text-4xl md:text-5xl text-navy mb-16 text-center">The Secretariat</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="group bg-white border border-dark/10 p-8 hover:border-gold/50 transition-colors">
+                <h4 class="font-serif text-xl text-navy mb-1 border-b border-gold/30 pb-2 inline-block">Oğuz Açıkel</h4>
+                <p class="font-sans text-xs uppercase tracking-widest text-dark/60 mt-3 mb-4">Chef de Cabinet</p>
+                <p class="font-sans text-sm font-light text-dark/70">The senior official who manages the schedule and administrative affairs of the organisation.</p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="group bg-white border border-dark/10 p-8 hover:border-gold/50 transition-colors">
+                <h4 class="font-serif text-xl text-navy mb-1 border-b border-gold/30 pb-2 inline-block">Ay Şahin</h4>
+                <p class="font-sans text-xs uppercase tracking-widest text-dark/60 mt-3 mb-4">Secretary-General</p>
+                <p class="font-sans text-sm font-light text-dark/70">The chief administrative officer of the organisation.</p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="group bg-white border border-dark/10 p-8 hover:border-gold/50 transition-colors">
+                <h4 class="font-serif text-xl text-navy mb-1 border-b border-gold/30 pb-2 inline-block">Neva İnan</h4>
+                <p class="font-sans text-xs uppercase tracking-widest text-dark/60 mt-3 mb-4">Director-General</p>
+                <p class="font-sans text-sm font-light text-dark/70">The executive management role responsible for administering the organisation's departments.</p>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="group bg-white border border-dark/10 p-8 hover:border-gold/50 transition-colors">
+                <h4 class="font-serif text-xl text-navy mb-1 border-b border-gold/30 pb-2 inline-block">İpek Akyıldız</h4>
+                <p class="font-sans text-xs uppercase tracking-widest text-dark/60 mt-3 mb-4">Deputy-Director-General</p>
+                <p class="font-sans text-sm font-light text-dark/70">The right-hand man of the Director-General, helps the Director-General during preparation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Organiser -->
+    <section class="py-20 bg-white border-y border-dark/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="font-sans uppercase tracking-widest text-xs text-dark/40 mb-6">Organiser Institution</h3>
+            <h2 class="font-serif text-3xl text-navy mb-6">Mod Eryaman Koleji</h2>
+            <div class="w-12 h-px bg-gold mx-auto mb-6"></div>
+            <p class="font-sans font-light text-dark/70 leading-relaxed max-w-2xl mx-auto">
+                Mod Eryaman Koleji is an institution defined by its commitment to academic excellence. We thank them for organising this beautiful event.
+            </p>
+        </div>
+    </section>
+
+    <!-- 12. Register / CTA -->
+    <section id="contact" class="py-32 bg-cream relative overflow-hidden">
+        <!-- Decorative bg elements -->
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <i data-lucide="mail-open" class="w-10 h-10 text-gold mx-auto mb-8"></i>
+            <h2 class="font-serif text-4xl md:text-5xl text-navy mb-6">Ask Us Anything!</h2>
+            <p class="font-serif italic text-xl text-dark/70 mb-12">Do you have any questions regarding the conference? Feel free to reach out.</p>
+            
+            <!-- Working Form using Formsubmit.co -->
+            <form action="https://formsubmit.co/ask.modermun@hotmail.com" method="POST" class="max-w-md mx-auto flex flex-col gap-4 text-left">
+                <!-- Honeypot -->
+                <input type="text" name="_honey" style="display:none">
+                <!-- Disable Captcha (optional, but good for UX) -->
+                <input type="hidden" name="_captcha" value="false">
+                
+                <input type="text" name="name" placeholder="Full Name" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
+                <input type="email" name="email" placeholder="Email Address" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors">
+                <textarea name="message" placeholder="Your Question..." rows="4" required class="w-full bg-white border border-dark/20 px-4 py-3 font-sans text-sm focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+                
+                <button type="submit" class="w-full btn-solid-dark py-3 mt-2">Send Message</button>
+            </form>
+            <p class="font-sans text-xs text-dark/40 mt-8 uppercase tracking-widest">Official invitations and registration details will be communicated in due course.</p>
+        </div>
+    </section>
+
+    <!-- 13. Footer -->
+    <footer class="bg-dark text-cream pt-20 pb-10 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="assets/logo.png" alt="MODERMUN Logo" class="h-10 w-auto">
+                    <h2 class="font-serif text-2xl text-white">MODERMUN</h2>
+                </div>
+                <p class="font-serif italic text-gold mb-6 opacity-90">Diplomacy in Action</p>
+                <p class="font-sans font-light text-sm opacity-60 max-w-sm leading-relaxed">
+                    Model United Nations conference hosted by Mod Eryaman Koleji, dedicated to debate, diplomacy, and the resolution of global issues.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-sans uppercase tracking-widest text-xs text-gold mb-6">Navigation</h4>
+                <ul class="space-y-3 font-sans text-sm font-light opacity-70">
+                    <li><a href="#about" class="hover:text-white hover:opacity-100 transition-colors">About</a></li>
+                    <li><a href="#schedule" class="hover:text-white hover:opacity-100 transition-colors">Schedule</a></li>
+                    <li><a href="#venue" class="hover:text-white hover:opacity-100 transition-colors">Venue & Accommodation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-sans uppercase tracking-widest text-xs text-gold mb-6">Contact</h4>
+                <ul class="space-y-3 font-sans text-sm font-light opacity-70">
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        <a href="mailto:ask.modermun@hotmail.com" class="hover:text-white transition-colors">ask.modermun@hotmail.com</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i data-lucide="map-pin" class="w-4 h-4 mt-1"></i>
+                        <span>Mod Eryaman Koleji<br>Ankara, Turkey</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 font-sans text-xs opacity-50">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> MODERMUN. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-gold transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal JS -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Sticky Navbar effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                nav.classList.remove('py-8');
+            } else {
+                nav.classList.remove('scrolled');
+                nav.classList.add('py-8');
+            }
+        });
+    </script>
+</body>
+</html>
