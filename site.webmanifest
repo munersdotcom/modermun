@@ -1,0 +1,21 @@
+{
+  "name": "MODERMUN - Model United Nations",
+  "short_name": "MODERMUN",
+  "description": "Model United Nations conference hosted by Mod Eryaman Koleji in Ankara.",
+  "start_url": "/modermun/",
+  "display": "standalone",
+  "background_color": "#0B1B3A",
+  "theme_color": "#0B1B3A",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
